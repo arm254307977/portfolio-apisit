@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Kanit:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Kanit', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', 'IBM Plex Sans Thai', system-ui, sans-serif;
 }
 
 :root {
@@ -22,7 +22,7 @@
   --purple-dim: rgba(167, 139, 250, 0.1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* * { margin: 0; padding: 0; box-sizing: border-box; } */
 
 html {
   scroll-behavior: smooth;
@@ -30,7 +30,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', 'IBM Plex Sans Thai', system-ui, sans-serif;
   font-size: 14px;
   line-height: 1.6;
   font-weight: 400;
@@ -38,6 +38,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg);
   color: var(--text);
+}
+
+html.lang-th {
+  word-break: break-word;
+}
+html.lang-th body {
+  line-height: 1.75;
 }
 
 #root { width: 100%; min-height: 100vh; }

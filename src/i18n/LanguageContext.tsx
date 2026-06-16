@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import th from "./th";
 import en from "./en";
 
@@ -21,6 +21,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   });
 
   const t = lang === "th" ? th : en;
+
+  useEffect(() => {
+    const html = document.documentElement;
+    html.lang = lang;
+    html.classList.toggle("lang-th", lang === "th");
+  }, [lang]);
 
   const toggleLang = () => {
     const next: Lang = lang === "th" ? "en" : "th";

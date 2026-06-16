@@ -10,9 +10,9 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen overflow-x-hidden" style={{ background: "var(--bg)", color: "var(--text)" }}>
+      <div className="min-h-screen overflow-x-hidden bg-(--bg) text-(--text)">
         <Navbar />
-        <main className="portfolio-shell">
+        <main className="portfolio-shell flex flex-col items-center justify-center">
           <Hero />
           <About />
           <Projects />

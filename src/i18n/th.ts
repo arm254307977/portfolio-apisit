@@ -20,7 +20,7 @@ const th = {
     eyebrow: "ประวัติ",
     title: "เกี่ยวกับฉัน",
     bio1:
-      "ผมคืออภิสิทธิ์ นักพัฒนา Frontend ที่เน้นสร้างเว็บอินเทอร์เฟซที่สะอาด เร็ว และใช้งานได้จริง",
+      "ผมคือ นักพัฒนา Frontend ที่เน้นสร้างเว็บอินเทอร์เฟซที่สะอาด เร็ว และใช้งานได้จริง",
     bio2:
       "มีทักษะด้าน React, TypeScript และ Node.js พร้อมใส่ใจ responsive design, ความแม่นยำของ UI และโค้ดที่ดูแลต่อได้ง่าย",
     github_label: "GitHub Profile",
@@ -114,6 +114,7 @@ const th = {
     subtitle: "ถ้ามีงาน โปรเจกต์ หรืออยากคุย ติดต่อได้ทางอีเมลหรือ GitHub ครับ",
     email_label: "อีเมล",
     github_label: "GitHub",
+    phone_label: "เบอร์โทร",
     copy: "คัดลอกอีเมล",
     copied: "คัดลอกแล้ว!",
     form: {

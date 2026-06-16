@@ -134,10 +134,10 @@ export default function Hero() {
 
   return (
     <section
-      id="home"
-      className="relative overflow-hidden min-h-screen flex items-center"
-      style={{ background: "var(--bg)" }}
-    >
+    id="home"
+    className="relative overflow-hidden w-full flex items-center justify-center md:h-[90vh] h-[120vh] -mt-20 md:mt-0"
+    style={{ background: "var(--bg)" }}
+  >
       {/* Dot grid */}
       <div className="absolute inset-0 dot-grid" style={{ opacity: 0.5 }} />
 
@@ -153,18 +153,18 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 w-full px-6 sm:px-12 py-28 lg:py-32 flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8">
+      <div className="relative z-10 w-full md:mt-0 px-6 sm:px-12 py-28 flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8 max-w-7xl">
         {/* Left: Text */}
         <div className="flex-1 lg:max-w-2xl order-2 lg:order-1 text-center lg:text-left">
           {/* Terminal label */}
           <motion.div {...up(0)} className="mb-6 flex items-center gap-1.5 font-mono text-[11px] justify-center lg:justify-start">
-            <span style={{ color: "var(--cyan)" }}>›</span>
-            <span style={{ color: "var(--text-muted)" }}>const</span>
-            <span style={{ color: "var(--text-dim)" }}>role</span>
-            <span style={{ color: "var(--text-muted)" }}>=</span>
-            <span style={{ color: "var(--purple)" }}>"</span>
-            <span style={{ color: "var(--text)" }}>{t.hero.role}</span>
-            <span style={{ color: "var(--purple)" }}>"</span>
+            <span className="text-cyan">›</span>
+            <span className="text-(--text-muted)">const</span>
+            <span className="text-(--text-dim)">role</span>
+            <span className="text-(--text-muted)">=</span>
+            <span className="text-(--purple)">"</span>
+            <span className="text-(--text)">{t.hero.role}</span>
+            <span className="text-(--purple)">"</span>
             <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
@@ -175,15 +175,13 @@ export default function Hero() {
           {/* Name */}
           <motion.h1
             {...up(0.1)}
-            className="font-display leading-[0.88] tracking-tight"
+            className={`font-bold tracking-tight text-(--text) ${lang === "th" ? "leading-[1.05]" : "leading-[0.88]"}`}
             style={{
               fontSize: lang === "th" ? "clamp(2.6rem, 7.2vw, 6.8rem)" : "clamp(3.2rem, 9vw, 8.5rem)",
-              fontWeight: 700,
-              color: "var(--text)",
             }}
           >
             {t.hero.name.split(" ").map((word, i) => (
-              <span key={i} style={{ display: "block" }}>{word}</span>
+              <span key={i} className="block">{word}</span>
             ))}
           </motion.h1>
 
@@ -192,27 +190,26 @@ export default function Hero() {
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
-            className="mt-7 mb-7 h-px w-16 origin-left mx-auto lg:mx-0"
+            className="my-2 h-px w-16 origin-left mx-auto lg:mx-0"
             style={{ background: "linear-gradient(to right, var(--cyan), rgba(167,139,250,0.5))" }}
           />
 
           {/* Subtitle */}
-          <motion.p {...up(0.3)} className="leading-relaxed mx-auto lg:mx-0 max-w-md" style={{ fontSize: 15, color: "var(--text-muted)" }}>
+          <motion.p {...up(0.3)} className="leading-relaxed mx-auto lg:mx-0 max-w-md text-[15px] text-(--text-muted)">
             {t.hero.subtitle}
           </motion.p>
 
           {/* Location badge */}
-          <motion.div {...up(0.38)} className="mt-5 inline-flex items-center gap-2 font-mono text-[11px]" style={{ color: "var(--text-muted)" }}>
-            <span style={{ color: "var(--cyan)", fontSize: 8 }}>●</span>
-            Bangkok, Thailand
+          <motion.div {...up(0.38)} className="mt-2 inline-flex items-center gap-2 font-mono text-[11px] text-(--text-muted)">
+            <span className="text-cyan" style={{ fontSize: 8 }}>●</span>
+            Chiang Rai, Thailand
           </motion.div>
 
           {/* CTAs */}
-          <motion.div {...up(0.45)} className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
+          <motion.div {...up(0.45)} className="mt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
             <a
               href="#projects"
-              className="font-display font-semibold px-6 py-3 text-sm transition-all duration-300"
-              style={{ background: "var(--cyan)", color: "#04050a" }}
+              className="px-6 py-3 text-sm border transition-all duration-300 bg-(--cyan) text-[#04050a]"
               onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 0 24px rgba(34,211,238,0.4)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
@@ -220,8 +217,8 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
-              className="font-display font-medium px-6 py-3 text-sm border transition-all duration-300"
-              style={{ borderColor: "rgba(34,211,238,0.35)", color: "var(--text)" }}
+              className="px-6 py-3 text-sm border transition-all duration-300 text-(--text)"
+              style={{ borderColor: "rgba(34,211,238,0.35)" }}
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(34,211,238,0.7)"; e.currentTarget.style.background = "rgba(34,211,238,0.05)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(34,211,238,0.35)"; e.currentTarget.style.background = "transparent"; }}
             >
@@ -250,7 +247,7 @@ export default function Hero() {
         aria-hidden="true"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-(--text-muted)">
           scroll
         </span>
         <motion.div

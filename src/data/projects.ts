@@ -9,6 +9,7 @@ export interface Project {
   github: string;
   demo?: string;
   color: string;
+  icon: string;
 }
 
 const projects: Project[] = [
@@ -21,8 +22,9 @@ const projects: Project[] = [
     language: "TypeScript",
     tags: ["API Integration", "Real-time Data", "Responsive"],
     github: "https://github.com/arm254307977/Weather",
-    demo: "https://weather-phi-lovat.vercel.app",
+    demo: "https://weather-by-arm.vercel.app/",
     color: "#3b82f6",
+    icon: "weather",
   },
   {
     id: 2,
@@ -33,18 +35,22 @@ const projects: Project[] = [
     language: "TypeScript",
     tags: ["Creative UI", "Animation", "Personal"],
     github: "https://github.com/arm254307977/HBD_KF",
+    demo: "https://birthday-kf.netlify.app/",
     color: "#ec4899",
+    icon: "heart",
   },
   {
     id: 3,
-    titleTh: "Test StockRadars",
-    titleEn: "Test StockRadars",
-    descTh: "โปรเจกต์ทดสอบที่พัฒนาสำหรับ StockRadars โดยใช้ JavaScript",
-    descEn: "A test project developed for StockRadars technical assessment using JavaScript.",
+    titleTh: "Test Old Man",
+    titleEn: "Test Old Man",
+    descTh: "โปรเจกต์ทดสอบการตอบสนองของผู้สูงอายุ พัฒนาเพื่อให้มหาวิทยาลัยนำไปทดลองใช้",
+    descEn: "A response-testing application for elderly users, developed for university research.",
     language: "JavaScript",
-    tags: ["Technical Test", "Data Display", "Clean Code"],
-    github: "https://github.com/arm254307977/Test_StockRadars_Apisit",
+    tags: ["UX Research", "Accessibility", "University"],
+    github: "https://github.com/arm254307977/arm-test-oldMan",
+    demo: "https://test-old-man.netlify.app/",
     color: "#f59e0b",
+    icon: "chart",
   },
   {
     id: 4,
@@ -55,7 +61,9 @@ const projects: Project[] = [
     language: "JavaScript",
     tags: ["Maps API", "Interactive", "Geolocation"],
     github: "https://github.com/arm254307977/cannon-maps",
+    demo: "https://connon-maps-up.netlify.app/",
     color: "#10b981",
+    icon: "map",
   },
 ];
 

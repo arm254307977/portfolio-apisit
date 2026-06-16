@@ -47,8 +47,8 @@ export default function Skills() {
   const { t } = useLang();
 
   return (
-    <section id="skills" className="py-24">
-      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+    <section id="skills" className="py-24 px-5 sm:px-6">
+      <div className="mx-auto max-w-7xl w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

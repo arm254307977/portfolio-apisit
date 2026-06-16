@@ -115,6 +115,7 @@ const en = {
     subtitle: "Have a role, project, or idea in mind? I'm available for frontend work. Reach me through email or GitHub.",
     email_label: "Email",
     github_label: "GitHub",
+    phone_label: "Phone",
     copy: "Copy Email",
     copied: "Copied!",
     form: {
