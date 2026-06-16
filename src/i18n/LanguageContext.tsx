@@ -17,7 +17,7 @@ const LangContext = createContext<LangContextType | null>(null);
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(() => {
     const saved = localStorage.getItem("portfolio-lang");
-    return (saved as Lang) || "th";
+    return (saved as Lang) || "en";
   });
 
   const t = lang === "th" ? th : en;
