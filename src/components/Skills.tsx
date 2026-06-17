@@ -80,7 +80,7 @@ export default function Skills() {
                 boxShadow: "0 18px 40px rgba(0,0,0,0.28)",
                 y: -4,
               }}
-              className="group flex cursor-default flex-col gap-5 rounded-md border border-white/10 bg-white/[0.045] p-5 shadow-sm transition-colors hover:border-cyan-300/30"
+              className="group flex cursor-default flex-col gap-5 rounded-md border border-white/10 bg-white/4.5 p-5 shadow-sm transition-colors hover:border-cyan-300/30"
             >
               <div
                 className="flex size-14 items-center justify-center rounded-md transition-transform group-hover:rotate-3"

@@ -1,9 +1,10 @@
 import express from "express";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import cors from "cors";
 import "dotenv/config";
 
 const app = express();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const allowedOrigins = process.env.ALLOWED_ORIGIN
   ? process.env.ALLOWED_ORIGIN.split(",")
@@ -12,14 +13,6 @@ const allowedOrigins = process.env.ALLOWED_ORIGIN
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS, // Gmail App Password (ไม่ใช่รหัสผ่านจริง)
-  },
-});
-
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
@@ -27,14 +20,18 @@ app.post("/api/contact", async (req, res) => {
     return res.status(400).json({ error: "กรุณากรอกข้อมูลให้ครบ" });
   }
 
-  await transporter.sendMail({
-    from: process.env.GMAIL_USER,
-    to: process.env.GMAIL_USER,
-    subject: `[Portfolio] ข้อความจาก ${name}`,
-    text: `ชื่อ: ${name}\nEmail: ${email}\n\n${message}`,
-  });
-
-  res.json({ success: true });
+  try {
+    await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: process.env.CONTACT_EMAIL,
+      subject: `[Portfolio] ข้อความจาก ${name}`,
+      text: `ชื่อ: ${name}\nEmail: ${email}\n\n${message}`,
+    });
+    res.json({ success: true });
+  } catch (err) {
+    console.error("resend error:", err);
+    res.status(500).json({ error: "ส่งอีเมลไม่สำเร็จ กรุณาลองใหม่" });
+  }
 });
 
 const PORT = process.env.PORT ?? 3001;
