@@ -5,7 +5,11 @@ import "dotenv/config";
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+const allowedOrigins = process.env.ALLOWED_ORIGIN
+  ? process.env.ALLOWED_ORIGIN.split(",")
+  : ["http://localhost:5173"];
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
@@ -33,4 +37,5 @@ app.post("/api/contact", async (req, res) => {
   res.json({ success: true });
 });
 
-app.listen(3001, () => console.log('Backend running on port 3001'));
+const PORT = process.env.PORT ?? 3001;
+app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
