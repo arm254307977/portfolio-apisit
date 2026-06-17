@@ -25,3 +25,5 @@ dist-ssr
 .agents/
 .claude/
 CLAUDE.md
+backend/.env
+backend/node_modules
