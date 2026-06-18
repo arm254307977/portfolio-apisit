@@ -20,7 +20,7 @@ const inputBase: React.CSSProperties = {
   transition: "border-color 0.25s ease",
 };
 
-type Fields = { name: string; email: string; message: string };
+type Fields = { name: string; email: string; message: string; website: string };
 type Errors = Partial<Fields>;
 
 function validate(fields: Fields, f: { err_name: string; err_email: string; err_email_invalid: string; err_message: string }): Errors {
@@ -39,7 +39,7 @@ export default function Contact() {
   const { t } = useLang();
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
-  const [fields, setFields] = useState<Fields>({ name: "", email: "", message: "" });
+  const [fields, setFields] = useState<Fields>({ name: "", email: "", message: "", website: "" });
   const [errors, setErrors] = useState<Errors>({});
 
   const handleCopy = () => {
@@ -205,6 +205,16 @@ export default function Contact() {
             onSubmit={handleSubmit}
             className="p-6 sm:p-8 border border-(--border) bg-(--surface)"
           >
+            <input
+              type="text"
+              name="website"
+              value={fields.website}
+              onChange={handleChange}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="text-[10px] uppercase tracking-[0.18em] block mb-2.5 text-(--text-muted)">{t.contact.form.name}</span>

@@ -4,7 +4,11 @@ import cors from "cors";
 import "dotenv/config";
 
 const app = express();
-const resend = new Resend(process.env.RESEND_API_KEY);
+app.set("trust proxy", 1);
+
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT = 5;
+const attempts = new Map();
 
 const allowedOrigins = process.env.ALLOWED_ORIGIN
   ? process.env.ALLOWED_ORIGIN.split(",")
@@ -13,12 +17,71 @@ const allowedOrigins = process.env.ALLOWED_ORIGIN
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
-app.post("/api/contact", async (req, res) => {
-  const { name, email, message } = req.body;
+function validateContact({ name = "", email = "", message = "" }) {
+  const clean = {
+    name: String(name).trim(),
+    email: String(email).trim(),
+    message: String(message).trim(),
+  };
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: "กรุณากรอกข้อมูลให้ครบ" });
+  if (!clean.name || !clean.email || !clean.message) {
+    return { error: "กรุณากรอกข้อมูลให้ครบ" };
   }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean.email)) {
+    return { error: "อีเมลไม่ถูกต้อง" };
+  }
+
+  if (clean.name.length > 80 || clean.email.length > 120 || clean.message.length > 2000) {
+    return { error: "ข้อความยาวเกินไป" };
+  }
+
+  return { clean };
+}
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const hit = attempts.get(ip);
+
+  if (!hit || now - hit.startedAt > RATE_WINDOW_MS) {
+    attempts.set(ip, { count: 1, startedAt: now });
+    return false;
+  }
+
+  hit.count += 1;
+  return hit.count > RATE_LIMIT;
+}
+
+if (process.argv.includes("--check")) {
+  console.assert(validateContact({ name: "", email: "a@b.com", message: "hi" }).error);
+  console.assert(validateContact({ name: "Arm", email: "bad", message: "hi" }).error);
+  console.assert(validateContact({ name: "Arm", email: "a@b.com", message: "hi" }).clean.email === "a@b.com");
+  process.exit(0);
+}
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+app.get("/api/health", (req, res) => {
+  res.json({ ok: true });
+});
+
+app.post("/api/contact", async (req, res) => {
+  const { website } = req.body;
+
+  if (website) {
+    return res.json({ success: true });
+  }
+
+  if (isRateLimited(req.ip)) {
+    return res.status(429).json({ error: "ส่งข้อความถี่เกินไป กรุณาลองใหม่ภายหลัง" });
+  }
+
+  const result = validateContact(req.body);
+  if (result.error) {
+    return res.status(400).json({ error: result.error });
+  }
+
+  const { name, email, message } = result.clean;
 
   try {
     await resend.emails.send({
